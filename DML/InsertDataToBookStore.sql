@@ -1,6 +1,6 @@
 USE BookStore;
 
--- Insert whimsical authors into the Authors table.
+-- Insert authors into the Authors table.
 INSERT INTO Authors (FirstName, LastName, DateOfBirth)
 VALUES 
 ('Luna', 'Lovegood', '1981-02-13'),
@@ -15,7 +15,7 @@ VALUES
 ('Harry', 'Potter', '1980-07-31');
 
 
--- Insert enchanted publishers into the Publishers table.
+-- Insert publishers into the Publishers table.
 INSERT INTO Publishers (Name, Address, Website)
 VALUES 
 ('Hogwarts Press', 'Hogsmeade, Highland, Scotland', 'www.hogwartspress.com'),
@@ -29,7 +29,7 @@ VALUES
 ('Oz Publishing', 'Emerald City, Oz', 'www.ozpublishing.com'),
 ('Neverland Editions', 'Neverland', 'www.neverlandeditions.com');
 
--- Insert legendary books into the Books table
+-- Insert books into the Books table
 INSERT INTO Books (Title, AuthorID, PublisherID, PublicationYear, Price, Genre)
 VALUES 
 ('The Sorcerer’s Stone', 10, 1, 2024, 30, 'Fantasy'),
