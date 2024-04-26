@@ -1,7 +1,5 @@
 # MS-SQL-Practice
 
-# MS-SQL-Practice Repository
-
 ## Introduction
 This repository is dedicated to practicing Microsoft SQL Server operations. It contains scripts for creating and manipulating a sample database named `BookStore`.
 
