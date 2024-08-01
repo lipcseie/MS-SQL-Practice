@@ -10,7 +10,7 @@ The repository is organized into two main folders:
 This folder contains scripts for creating, altering, and dropping tables and other database objects. These are commands like `CREATE`, `ALTER`, `DROP`, etc. Scripts for creating the `BookStore` database and its tables are located here.
 
 ### DML (Data Manipulation Language)
-This folder contains scripts for manipulating data within the existing schema. These are commands like `SELECT`, `INSERT`, `UPDATE`, `DELETE`, etc. Scripts for inserting initial data into the `BookStore` tables are found here.
+This folder contains scripts for manipulating data within the existing schema. These are commands like `SELECT`, `INSERT`, `UPDATE`, `DELETE`, Sorting and Grouping. Scripts for inserting initial data into the `BookStore` tables are found here.
 
 ## Getting Started
 To get started with the `BookStore` database:
