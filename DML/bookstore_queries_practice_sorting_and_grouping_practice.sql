@@ -19,8 +19,17 @@ JOIN Books B ON O.BookID = B.BookID
 ORDER BY TotalValueOfTheOrder DESC;
 
 -- Retrieve a list of publishers sorted by the number of books they have published, in descending order.
+SELECT P.Name AS PublisherName, COUNT(B.BookID) AS NumberOfBookSTheyPublished
+FROM Publishers P
+JOIN Books B ON P.PublisherID = B.PublisherID
+GROUP BY P.Name
+ORDER BY NumberOfBookSTheyPublished DESC;
 
 -- Retrieve the total sales (quantity * price) for each book genre.
+SELECT B.Genre, SUM(O.Quantity * B.Price) AS TotalSales
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY B.Genre;
 
 -- Retrieve the number of books ordered on each date, grouped by order date.
 
