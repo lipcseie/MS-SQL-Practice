@@ -31,6 +31,10 @@ FROM Books B
 JOIN Orders O ON B.BookID = O.BookID
 GROUP BY B.Genre;
 
--- Retrieve the number of books ordered on each date, grouped by order date.
-
 -- Retrieve a list of publishers with the names of authors who have books published by each publisher.
+SELECT P.Name AS PublisherName, A.FirstName, A.LastName 
+FROM Publishers P
+JOIN Books B ON P.PublisherID = B.PublisherID
+JOIN Authors A ON B.AuthorID = A.AuthorID;
+
+-- Retrieve the number of books ordered on each date, grouped by order date.
