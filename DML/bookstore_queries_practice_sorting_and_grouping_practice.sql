@@ -38,3 +38,5 @@ JOIN Books B ON P.PublisherID = B.PublisherID
 JOIN Authors A ON B.AuthorID = A.AuthorID;
 
 -- Retrieve the number of books ordered on each date, grouped by order date.
+SELECT SUM(Quantity) AS BooksOrdered, OrderDate FROM Orders
+GROUP BY OrderDate;
