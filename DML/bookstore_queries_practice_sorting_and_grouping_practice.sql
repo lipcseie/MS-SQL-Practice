@@ -40,3 +40,50 @@ JOIN Authors A ON B.AuthorID = A.AuthorID;
 -- Retrieve the number of books ordered on each date, grouped by order date.
 SELECT SUM(Quantity) AS BooksOrdered, OrderDate FROM Orders
 GROUP BY OrderDate;
+
+-- Sort Books by Publication Year and then by Title (alphabetically).
+SELECT PublicationYear, Title 
+FROM Books
+ORDER BY PublicationYear ASC,
+Title ASC;
+
+-- Retrieve a list of authors grouped by the number of books they have written, sorted by the number of books in descending order.
+SELECT A.FirstName, A.LastName, COUNT(B.Title) AS NumberOfBooks
+FROM Authors A
+JOIN Books B ON A.AuthorID = B.AuthorID
+GROUP BY A.FirstName, A.LastName
+ORDER BY NumberOfBooks DESC;
+
+-- List all customers, sorted by their last name, and then by their first name.
+SELECT FirstName, LastName
+FROM Customers
+ORDER BY LastName ASC,
+FirstName ASC;
+
+-- Retrieve the average price of books, grouped by genre and sorted by the average price in descending order.
+SELECT Genre, AVG(Price) AS AvaragePrice
+FROM Books
+GROUP BY Genre
+ORDER BY AvaragePrice DESC;
+
+-- List all publishers, sorted by the average price of books they publish, from highest to lowest.
+SELECT P.Name, AVG(B.Price) AS AveragePrice
+FROM Publishers P
+JOIN Books B ON P.PublisherID = B.PublisherID
+GROUP BY P.Name
+ORDER BY AveragePrice DESC;
+
+-- Retrieve a list of orders, grouped by customer, and sorted by the total quantity of books ordered by each customer in descending order.
+SELECT C.LastName, SUM(O.Quantity) AS TotalQuantity
+FROM Orders O
+JOIN Customers C ON O.CustomerID = C.CustomerID
+GROUP BY C.LastName
+ORDER BY TotalQuantity DESC;
+
+-- Retrieve the total number of orders and total sales value for each book, sorted by the total sales value in descending order.
+
+-- Sort authors by their date of birth, from oldest to youngest, and then by their last name alphabetically.
+
+-- Retrieve the number of books available for each genre and sort the results by the number of books in descending order.
+
+
