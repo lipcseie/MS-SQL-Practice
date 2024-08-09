@@ -81,9 +81,20 @@ GROUP BY C.LastName
 ORDER BY TotalQuantity DESC;
 
 -- Retrieve the total number of orders and total sales value for each book, sorted by the total sales value in descending order.
+SELECT B.Title, COUNT(O.OrderID) AS TotalNumberOfOrders, SUM(B.Price * O.Quantity) AS TotalSales
+FROM Orders O
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY B.Title
+ORDER BY TotalSales DESC;
 
 -- Sort authors by their date of birth, from oldest to youngest, and then by their last name alphabetically.
+SELECT DateOfBirth, LastName FROM Authors
+ORDER BY DateOfBirth ASC, LastName ASC;
 
 -- Retrieve the number of books available for each genre and sort the results by the number of books in descending order.
+SELECT COUNT(Title) AS NumberOfBooks, Genre 
+FROM Books
+GROUP BY Genre
+ORDER BY NumberOfBooks DESC;
 
 
