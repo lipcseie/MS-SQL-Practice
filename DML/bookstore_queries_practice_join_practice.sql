@@ -62,3 +62,31 @@ From Customers C
 JOIN Orders O ON C.CustomerID = O.OrderID
 JOIN Books B ON O.BookID = B.BookID
 ORDER BY OrderDate DESC;
+
+-- Find all books and their authors where the author's last name starts with 'S'.
+SELECT B.Title, A.LastName 
+FROM Books B
+JOIN Authors A ON B.AuthorID = A.AuthorID
+WHERE A.LastName LIKE 'S%';
+
+-- List all publishers and the count of books they have published, including publishers with no books.
+SELECT COUNT(B.BookID) AS BooksTheyPublished, P.Name
+FROM Books B
+LEFT JOIN Publishers P ON B.PublisherID = P.PublisherID
+GROUP BY P.PublisherID,P.Name;
+
+-- Retrieve the details of all orders along with the book titles and customer names.
+
+-- Get a list of all customers who have ordered books in the year 2023. Include their full names and the titles of the books they ordered.
+
+-- Find all books with their corresponding publisher names and prices that are above $20.
+
+-- List all authors who have written more than 2 books and include their full names and the number of books they have written.
+
+-- Show the total revenue generated from orders for each book. Include the book title and total revenue in the results.
+
+-- Find the oldest book (earliest publication year) and its author.
+
+-- List all customers who have ordered more than 5 books in total, showing their full names and the total number of books ordered.
+
+-- Retrieve a list of books and their genres where the genre is not 'Science Fiction' and display the title, genre, and the author's last name.
