@@ -82,18 +82,54 @@ JOIN Books B ON O.BookID = B.BookID
 JOIN Customers C ON O.CustomerID = C.CustomerID;
 
 -- Get a list of all customers who have ordered books in the year 2023. Include their full names and the titles of the books they ordered.
-SELECT C.FirstName AS CustomerFirstName, C.LastName AS CustomerLastName, B.PublicationYear, B.Title AS BookTitle
+SELECT C.FirstName AS CustomerFirstName, C.LastName AS CustomerLastName, O.OrderDate, B.Title
 FROM Customers C
-JOIN Books
+JOIN Orders O ON C.CustomerID = O.OrderID
+JOIN Books B ON O.BookID = B.BookID
+WHERE YEAR(O.OrderDate) = 2023;
 
 -- Find all books with their corresponding publisher names and prices that are above $20.
+SELECT P.Name AS PublisherName, B.Title AS BookTitle, B.Price
+FROM Publishers P
+JOIN Books B ON P.PublisherID = B.PublisherID
+WHERE B.Price > 20;
 
 -- List all authors who have written more than 2 books and include their full names and the number of books they have written.
+SELECT A.FirstName AS AuthorFirstName,A.LastName AS AuthorLastName, COUNT(B.BookID) AS BooksWritten
+FROM Authors A
+JOIN Books B ON A.AuthorID = B.AuthorID
+GROUP BY A.FirstName, A.LastName
+HAVING COUNT(B.BookID) > 2;
 
 -- Show the total revenue generated from orders for each book. Include the book title and total revenue in the results.
+SELECT B.Title AS BookTitle, 
+	   SUM(B.Price * O.Quantity) AS TotalRevenue
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY B.Title;
 
 -- Find the oldest book (earliest publication year) and its author.
+SELECT TOP 1 b.Title,
+	   B.PublicationYear,
+	   A.FirstName AS AuthorFirstName,
+	   A.LastName AS AuthorLastName
+FROM Books B
+JOIN Authors A ON B.AuthorID = A.AuthorID
+ORDER BY B.PublicationYear ASC;
 
--- List all customers who have ordered more than 5 books in total, showing their full names and the total number of books ordered.
+-- List all customers who have ordered more than2 books in total, showing their full names and the total number of books ordered.
+SELECT C.FirstName AS CustomerFirstName,
+	   C.LastName AS CustomerLastName,
+	   SUM(O.Quantity) AS TotalNumberOdBooksOrderd
+FROm Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+GROUP BY C.FirstName, C.LastName
+HAVING SUM(O.Quantity) > 2;
 
 -- Retrieve a list of books and their genres where the genre is not 'Science Fiction' and display the title, genre, and the author's last name.
+SELECT B.Title AS BookTitle,
+	   B.Genre,
+	   A.LastName
+FROM Books B
+JOIN Authors A ON B.AuthorID = A.AuthorID
+WHERE B.Genre != 'Science Fiction';
