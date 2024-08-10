@@ -76,8 +76,15 @@ LEFT JOIN Publishers P ON B.PublisherID = P.PublisherID
 GROUP BY P.PublisherID,P.Name;
 
 -- Retrieve the details of all orders along with the book titles and customer names.
+SELECT O.OrderID, O.Quantity, O.OrderDate, B.Title AS BookTitle, C.FirstName AS CustomerFirstName, C.LastName AS CustomerLastName
+FROM Orders O
+JOIN Books B ON O.BookID = B.BookID
+JOIN Customers C ON O.CustomerID = C.CustomerID;
 
 -- Get a list of all customers who have ordered books in the year 2023. Include their full names and the titles of the books they ordered.
+SELECT C.FirstName AS CustomerFirstName, C.LastName AS CustomerLastName, B.PublicationYear, B.Title AS BookTitle
+FROM Customers C
+JOIN Books
 
 -- Find all books with their corresponding publisher names and prices that are above $20.
 
