@@ -50,3 +50,23 @@ WHERE Price = (
 	WHERE Genre = 'Epic'
 	);
 
+-- Retrieve the names of publishers who are associated with books from more than one genre.
+SELECT Name AS PublisherName
+FROM Publishers
+WHERE PublisherID IN (
+    SELECT PublisherID
+    FROM Books
+    GROUP BY PublisherID
+    HAVING COUNT(DISTINCT Genre) > 1
+	);
+
+-- Retrieve the title and price of the most expensive book published by each publisher..
+SELECT B.Title, B.Price
+FROM Books B
+JOIN Publishers P ON B.PublisherID = P.PublisherID
+WHERE B.Price = (
+    SELECT MAX(B2.Price)
+    FROM Books B2
+    WHERE B2.PublisherID = B.PublisherID
+	);
+
