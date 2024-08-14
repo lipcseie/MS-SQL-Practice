@@ -20,3 +20,8 @@ UNION
 SELECT CONCAT(a.FirstName, ' ', a.LastName) AS Name
 FROM Authors a
 JOIN Books b ON a.AuthorID = b.AuthorID;
+
+-- Write a query to list all first names of authors and customers in a single column named FirstName
+SELECT FirstName FROM Authors 
+UNION
+SELECT FirstName FROM Customers;
