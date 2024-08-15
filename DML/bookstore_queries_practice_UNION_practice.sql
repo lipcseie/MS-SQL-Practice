@@ -25,3 +25,9 @@ JOIN Books b ON a.AuthorID = b.AuthorID;
 SELECT FirstName FROM Authors 
 UNION
 SELECT FirstName FROM Customers;
+
+-- Combine the book titles from the Books table with customer names from the Customers table into a single list. 
+-- The result should have a column named BookOrCustomerName.
+SELECT Title AS BookOrCustomerName FROM Books
+UNION
+SELECT CONCAT(FirstName, ' ', LastName) AS BookOrCustomerName FROM Customers;
