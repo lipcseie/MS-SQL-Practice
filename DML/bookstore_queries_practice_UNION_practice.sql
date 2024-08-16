@@ -31,3 +31,9 @@ SELECT FirstName FROM Customers;
 SELECT Title AS BookOrCustomerName FROM Books
 UNION
 SELECT CONCAT(FirstName, ' ', LastName) AS BookOrCustomerName FROM Customers;
+
+-- Create a query that lists all order dates from the Orders table and all book titles from the Books table.
+-- The combined result should be in a single column named DateOrTitle
+SELECT CONVERT(NVARCHAR(100), OrderDate, 120) AS DateOrTitle FROM Orders 
+UNION 
+SELECT Title AS DateOrTitle FROM Books;
