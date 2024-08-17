@@ -37,3 +37,8 @@ SELECT CONCAT(FirstName, ' ', LastName) AS BookOrCustomerName FROM Customers;
 SELECT CONVERT(NVARCHAR(100), OrderDate, 120) AS DateOrTitle FROM Orders 
 UNION 
 SELECT Title AS DateOrTitle FROM Books;
+
+-- Write a query to combine all last names of authors with all last names of customers into a single list. The column in the result should be named LastName.
+SELECT LastName AS LastName FROM Authors
+UNION
+SELECT LastName AS LastName FROM Customers;
