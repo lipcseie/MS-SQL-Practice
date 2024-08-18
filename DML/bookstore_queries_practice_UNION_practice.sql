@@ -42,3 +42,9 @@ SELECT Title AS DateOrTitle FROM Books;
 SELECT LastName AS LastName FROM Authors
 UNION
 SELECT LastName AS LastName FROM Customers;
+
+-- Write a query that combines the email addresses of all customers and the website URLs of all publishers into a single list.
+-- The result should be in a single column named ContactInfo
+SELECT Email AS ContactInfo FROM Customers
+UNION
+SELECT Website AS ContactInfo FROM Publishers;
