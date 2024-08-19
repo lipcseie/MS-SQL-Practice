@@ -48,3 +48,9 @@ SELECT LastName AS LastName FROM Customers;
 SELECT Email AS ContactInfo FROM Customers
 UNION
 SELECT Website AS ContactInfo FROM Publishers;
+
+--  Write a query that combines the genres of all books and the first names of all authors into a single list.
+-- The result should be in a single column named Info
+SELECT Genre AS Info FROM Books
+UNION
+SELECT FirstName AS Info FROM Authors;
