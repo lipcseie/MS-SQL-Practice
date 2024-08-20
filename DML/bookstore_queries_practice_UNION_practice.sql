@@ -54,3 +54,9 @@ SELECT Website AS ContactInfo FROM Publishers;
 SELECT Genre AS Info FROM Books
 UNION
 SELECT FirstName AS Info FROM Authors;
+
+-- Write a query to list all publication years from the Books table and all order quantities from the Orders table.
+-- The combined result should be in a single column named YearOrQuantity
+SELECT CAST(PublicationYear AS NVARCHAR(100)) AS YearOrQuantity FROM Books
+UNION
+SELECT CAST(Quantity AS NVARCHAR(100)) AS YearOrQuantity FROM Orders;
