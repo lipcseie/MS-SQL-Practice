@@ -60,3 +60,9 @@ SELECT FirstName AS Info FROM Authors;
 SELECT CAST(PublicationYear AS NVARCHAR(100)) AS YearOrQuantity FROM Books
 UNION
 SELECT CAST(Quantity AS NVARCHAR(100)) AS YearOrQuantity FROM Orders;
+
+-- Write a query that combines the addresses of all publishers and the phone numbers of all customers into a single list.
+-- The result should be in a single column named ContactDetails.
+SELECT Address AS ContactDetails FROM Publishers
+UNION
+SELECT Phone AS ContactDetails FROM Customers;
