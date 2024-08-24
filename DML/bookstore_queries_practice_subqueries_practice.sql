@@ -70,3 +70,12 @@ WHERE B.Price = (
     WHERE B2.PublisherID = B.PublisherID
 	);
 
+-- Write a query to retrieve the names of authors who have published the most expensive book within their respective genres.
+SELECT A.FirstName, A.LastName, B.Genre, B.Title, B.Price
+FROM Books B
+JOIN Authors A ON B.AuthorID = A.AuthorID
+WHERE B.Price = (
+    SELECT MAX(B2.Price)
+    FROM Books B2
+    WHERE B2.Genre = B.Genre
+);
