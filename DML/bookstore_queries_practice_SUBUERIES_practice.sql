@@ -1,4 +1,5 @@
 USE BookStore
+
 -- Find books with a price higher than the average price of all books.
 SELECT * FROM Books
 WHERE price > (SELECT AVG(price) FROM Books);
@@ -79,3 +80,13 @@ WHERE B.Price = (
     FROM Books B2
     WHERE B2.Genre = B.Genre
 );
+
+-- Write a query to find the names of publishers who have published books in the same genre as the book titled "The Sorcerer’s Stone".
+SELECT P.Name, B.Genre 
+FROM Publishers P
+JOIN Books B ON P.PublisherID = B.PublisherID
+WHERE B.Genre = (
+	SELECT B2.Genre
+	FROM Books B2
+	WHERE B2.Title = 'The Sorcerer’s Stone'
+	);
