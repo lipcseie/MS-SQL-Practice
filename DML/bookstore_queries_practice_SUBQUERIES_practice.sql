@@ -90,3 +90,15 @@ WHERE B.Genre = (
 	FROM Books B2
 	WHERE B2.Title = 'The Sorcerer’s Stone'
 	);
+
+-- Write a query to list the names of customers who have placed orders for books written by the same author.
+SELECT C.FirstName AS CustomerFirstName, C.LastName AS CustomerLastName
+FROM Customers C
+WHERE C.CustomerID IN (
+    SELECT O.CustomerID
+    FROM Orders O
+    JOIN Books B ON O.BookID = B.BookID
+    GROUP BY O.CustomerID
+    HAVING COUNT(DISTINCT B.AuthorID) = 1
+);
+
