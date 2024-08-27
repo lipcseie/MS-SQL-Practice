@@ -111,3 +111,12 @@ WHERE B.Price < (
     FROM Books B2
     WHERE B2.AuthorID = B.AuthorID
 );
+
+-- Write a query to find the names of authors who have not published any books after the year 2020.
+SELECT A.FirstName, A.LastName
+FROM Authors A
+WHERE A.AuthorID NOT IN (
+    SELECT B.AuthorID
+    FROM Books B
+    WHERE B.PublicationYear > 2020
+);
