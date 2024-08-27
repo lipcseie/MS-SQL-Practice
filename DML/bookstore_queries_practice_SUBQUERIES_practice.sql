@@ -102,3 +102,12 @@ WHERE C.CustomerID IN (
     HAVING COUNT(DISTINCT B.AuthorID) = 1
 );
 
+-- Write a query to retrieve titles of books that are priced lower than the average price of all books written by the same author
+SELECT B.Title, B.Price, A.FirstName, A.LastName
+FROM Books B
+JOIN Authors A ON B.AuthorID = A.AuthorID
+WHERE B.Price < (
+    SELECT AVG(B2.Price)
+    FROM Books B2
+    WHERE B2.AuthorID = B.AuthorID
+);
