@@ -120,3 +120,24 @@ WHERE A.AuthorID NOT IN (
     FROM Books B
     WHERE B.PublicationYear > 2020
 );
+
+--Write a query to list the names of customers who have placed orders for books from publishers that are located in "Middle-Earth."
+SELECT DISTINCT C.FirstName, C.LastName
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+WHERE O.BookID IN (
+    SELECT B.BookID
+    FROM Books B
+    WHERE B.PublisherID IN (
+        SELECT P.PublisherID
+        FROM Publishers P
+        WHERE P.Address LIKE '%Middle-Earth%'
+    )
+);
+
+SELECT DISTINCT C.FirstName, C.LastName
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+JOIN Publishers P ON B.PublisherID = P.PublisherID
+WHERE P.Address LIKE '%Middle-Earth%';
