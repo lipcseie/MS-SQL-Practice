@@ -120,3 +120,19 @@ WHERE A.AuthorID NOT IN (
     FROM Books B
     WHERE B.PublicationYear > 2020
 );
+
+-- Write a query to list the titles of books written by authors who were born before the year 1980.
+SELECT B.Title, A.FirstName AS AuthorFirstName, A.LastName AS AuthorLastName
+FROM Books B
+JOIN Authors A ON B.AuthorID = A.AuthorID
+WHERE A.AuthorID IN (
+    SELECT AuthorID
+    FROM Authors
+    WHERE DateOfBirth IS NOT NULL AND DateOfBirth < '1980-01-01'
+);
+
+SELECT B.Title, A.FirstName AS AuthorFirstName, A.LastName AS AuthorLastName
+FROM Books B
+JOIN Authors A ON B.AuthorID = A.AuthorID
+WHERE A.DateOfBirth < '1980-01-01';
+
