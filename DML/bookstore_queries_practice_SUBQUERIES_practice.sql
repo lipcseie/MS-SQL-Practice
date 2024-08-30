@@ -136,3 +136,17 @@ FROM Books B
 JOIN Authors A ON B.AuthorID = A.AuthorID
 WHERE A.DateOfBirth < '1980-01-01';
 
+-- Write a query to find the first and last names of customers who have ordered more than 2 books
+SELECT C.FirstName AS CustumerFirstName, C.LastName AS CustomerLastName, O.Quantity
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+WHERE O.Quantity > 2;
+
+SELECT C.FirstName AS CustomerFirstName, C.LastName AS CustomerLastName
+FROM Customers C
+WHERE C.CustomerID IN (
+    SELECT O.CustomerID
+    FROM Orders O
+    GROUP BY O.CustomerID
+    HAVING SUM(O.Quantity) > 2
+);
