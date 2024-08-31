@@ -150,3 +150,13 @@ WHERE C.CustomerID IN (
     GROUP BY O.CustomerID
     HAVING SUM(O.Quantity) > 2
 );
+
+
+-- Write a query to list the titles of books that are priced higher than the average price of all books in the "Dystopian" genre.
+SELECT Title, Genre
+FROM Books
+WHERE Price > (
+	SELECT AVG(Price)
+	FROM Books
+	WHERE Genre = 'Dystopian'
+	);
