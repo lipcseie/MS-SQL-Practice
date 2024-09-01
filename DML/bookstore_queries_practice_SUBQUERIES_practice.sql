@@ -160,3 +160,13 @@ WHERE Price > (
 	FROM Books
 	WHERE Genre = 'Dystopian'
 	);
+
+-- Write a query to retrieve the names of publishers who have published at least 3 different books.
+SELECT Name
+FROM Publishers
+WHERE PublisherID IN (
+    SELECT PublisherID
+    FROM Books
+    GROUP BY PublisherID
+    HAVING COUNT(BookID) >= 3
+);
