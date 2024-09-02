@@ -170,3 +170,13 @@ WHERE PublisherID IN (
     GROUP BY PublisherID
     HAVING COUNT(BookID) >= 3
 );
+
+-- Write a query to retrieve the name and website of publishers who have published a book with the title "Peter Pan".
+SELECT P.Name, P.Website
+FROM Publishers P
+WHERE P.PublisherID IN (
+    SELECT B.PublisherID
+    FROM Books B
+    WHERE B.Title = 'Peter Pan'
+);
+
