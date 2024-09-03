@@ -180,3 +180,11 @@ WHERE P.PublisherID IN (
     WHERE B.Title = 'Peter Pan'
 );
 
+-- Write a query to find the first and last names of authors who have not written any books in the "Fantasy" genre.
+SELECT A.FirstName, A.LastName
+FROM Authors A
+WHERE A.AuthorID NOT IN (
+    SELECT B.AuthorID
+    FROM Books B
+    WHERE B.Genre = 'Fantasy'
+);
