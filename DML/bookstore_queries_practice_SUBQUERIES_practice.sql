@@ -188,3 +188,13 @@ WHERE A.AuthorID NOT IN (
     FROM Books B
     WHERE B.Genre = 'Fantasy'
 );
+
+-- Write a query to find the name of the publisher with the highest number of published books.
+SELECT P.Name
+FROM Publishers P
+WHERE P.PublisherID = (
+    SELECT TOP 1 B.PublisherID
+    FROM Books B
+    GROUP BY B.PublisherID
+    ORDER BY COUNT(B.BookID) DESC
+);
