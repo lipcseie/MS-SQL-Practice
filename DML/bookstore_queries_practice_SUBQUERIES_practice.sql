@@ -198,3 +198,13 @@ WHERE P.PublisherID = (
     GROUP BY B.PublisherID
     ORDER BY COUNT(B.BookID) DESC
 );
+
+-- Write a query to list the titles of books that were published after the most recent book written by Frodo Baggins
+SELECT Title
+FROM Books
+WHERE PublicationYear > (
+    SELECT MAX(B.PublicationYear)
+    FROM Books B
+    JOIN Authors A ON B.AuthorID = A.AuthorID
+    WHERE A.FirstName = 'Frodo' AND A.LastName = 'Baggins'
+);
