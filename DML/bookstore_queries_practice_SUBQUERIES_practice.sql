@@ -208,3 +208,14 @@ WHERE PublicationYear > (
     JOIN Authors A ON B.AuthorID = A.AuthorID
     WHERE A.FirstName = 'Frodo' AND A.LastName = 'Baggins'
 );
+
+-- Find customers who have placed an order for a book with the title "1984".
+SELECT C.FirstName, C.LastName 
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+WHERE B.BookID IN (
+    SELECT B2.BookID
+    FROM Books B2
+    WHERE B2.Title = '1984'
+);
