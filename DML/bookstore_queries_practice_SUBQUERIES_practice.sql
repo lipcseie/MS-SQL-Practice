@@ -219,3 +219,13 @@ WHERE B.BookID IN (
     FROM Books B2
     WHERE B2.Title = '1984'
 );
+
+-- Retrieve the titles of books written by the author with the most published books.
+SELECT Title
+FROM Books
+WHERE AuthorID = (
+    SELECT TOP 1 AuthorID
+    FROM Books
+    GROUP BY AuthorID
+    ORDER BY COUNT(BookID) DESC
+);
