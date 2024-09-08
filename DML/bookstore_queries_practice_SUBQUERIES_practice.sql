@@ -229,3 +229,12 @@ WHERE AuthorID = (
     GROUP BY AuthorID
     ORDER BY COUNT(BookID) DESC
 );
+
+-- List the names of authors who have never written a book in the "Science Fiction" genre.
+SELECT A.FirstName, A.LastName
+FROM Authors A
+WHERE A.AuthorID NOT IN (
+    SELECT B.AuthorID
+    FROM Books B
+    WHERE B.Genre = 'Science Fiction'
+);
