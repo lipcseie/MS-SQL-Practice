@@ -238,3 +238,14 @@ WHERE A.AuthorID NOT IN (
     FROM Books B
     WHERE B.Genre = 'Science Fiction'
 );
+
+-- Find the titles of books that are priced lower than the least expensive book published by "Hogwarts Press".
+SELECT B.Title
+FROM Books B
+JOIN Publishers P ON B.PublisherID = P.PublisherID
+WHERE B.Price < (
+    SELECT MIN(B2.Price)
+    FROM Books B2
+    JOIN Publishers P2 ON P2.PublisherID = P2.PublisherID
+    WHERE P2.Name = 'Hogwarts Press'
+);
