@@ -249,3 +249,16 @@ WHERE B.Price < (
     JOIN Publishers P2 ON P2.PublisherID = P2.PublisherID
     WHERE P2.Name = 'Hogwarts Press'
 );
+
+-- Get the names of customers who have ordered more books than the customer named "Tony Stark".
+SELECT C.FirstName, C.LastName
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+GROUP BY C.FirstName, C.LastName
+HAVING COUNT(O.BookID) > (
+    SELECT COUNT(O2.BookID)
+    FROM Customers C2
+    JOIN Orders O2 ON C2.CustomerID = O2.CustomerID
+    WHERE C2.FirstName = 'Tony' AND
+		  C2.LastName = 'Stark'
+);
