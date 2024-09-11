@@ -262,3 +262,12 @@ HAVING COUNT(O.BookID) > (
     WHERE C2.FirstName = 'Tony' AND
 		  C2.LastName = 'Stark'
 );
+
+-- Retrieve the genres of books that have an average price lower than the overall average price of all books.
+SELECT Genre
+FROM Books
+GROUP BY Genre
+HAVING AVG(Price) < (
+    SELECT AVG(Price)
+    FROM Books
+);
