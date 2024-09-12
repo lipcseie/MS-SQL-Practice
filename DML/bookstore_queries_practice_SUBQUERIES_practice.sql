@@ -271,3 +271,13 @@ HAVING AVG(Price) < (
     SELECT AVG(Price)
     FROM Books
 );
+
+-- List the titles of books written by authors who have written books in more than one genre.
+SELECT Title
+FROM Books
+WHERE AuthorID IN (
+    SELECT AuthorID
+    FROM Books
+    GROUP BY AuthorID
+    HAVING COUNT(DISTINCT Genre) > 1
+);
