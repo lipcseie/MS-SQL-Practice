@@ -281,3 +281,14 @@ WHERE AuthorID IN (
     GROUP BY AuthorID
     HAVING COUNT(DISTINCT Genre) > 1
 );
+
+-- Find the names of authors who have written the least expensive book in the "Fantasy" genre.
+SELECT FirstName, Lastname
+FROM Authors A
+JOIN Books B ON A.AuthorID = B.AuthorID
+WHERE B.Genre = 'Fantasy'
+AND B.Price = (
+    SELECT MIN(Price)
+    FROM Books
+    WHERE Genre = 'Fantasy'
+);
