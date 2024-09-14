@@ -292,3 +292,17 @@ AND B.Price = (
     FROM Books
     WHERE Genre = 'Fantasy'
 );
+
+-- Get the titles of books that were published before the earliest book written by "Katniss Everdeen".
+SELECT Title
+FROM Books
+WHERE PublicationYear < (
+    SELECT MIN(PublicationYear)
+    FROM Books
+    WHERE AuthorID = (
+        SELECT AuthorID
+        FROM Authors
+        WHERE FirstName = 'Katniss' AND
+			LastName = 'Everdeen'
+    )
+);
