@@ -306,3 +306,16 @@ WHERE PublicationYear < (
 			LastName = 'Everdeen'
     )
 );
+
+-- Retrieve the names of publishers who have published books more recently than the publisher "Shire Scrolls".
+-- with JOIN
+SELECT P.Name AS PublisherName
+FROM Publishers P
+JOIN Books B ON P.PublisherID = B.PublisherID
+GROUP BY P.Name
+HAVING MAX(B.PublicationYear) > (
+    SELECT MAX(B2.PublicationYear)
+    FROM Books B2
+    JOIN Publishers P2 ON B2.PublisherID = P2.PublisherID
+    WHERE P2.Name = 'Shire Scrolls'
+);
