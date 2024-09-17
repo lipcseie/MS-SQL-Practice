@@ -97,4 +97,8 @@ FROM Books
 GROUP BY Genre
 ORDER BY NumberOfBooks DESC;
 
-
+-- Retrieve the titles of books along with their authors, sorted by the author's last name, then by the book title alphabetically.
+SELECT B.Title, A.LastName, A.FirstName
+FROM Books B
+JOIN Authors A ON B.AuthorID = A.AuthorID
+ORDER BY A.LastName ASC, B.Title ASC;
