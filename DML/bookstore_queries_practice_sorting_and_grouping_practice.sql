@@ -109,3 +109,10 @@ FROM Customers C
 JOIN Orders O ON C.CustomerID = O.CustomerID
 GROUP BY C.CustomerID, C.FirstName, C.LastName
 ORDER BY NumberOfOrders DESC;
+
+-- Retrieve a list of books sorted by the number of orders placed for each book, in descending order.
+SELECT B.Title, COUNT(O.OrderID) AS NumberOfOrders
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY B.Title
+ORDER BY NumberOfOrders DESC;
