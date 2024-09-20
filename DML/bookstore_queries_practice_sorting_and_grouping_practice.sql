@@ -97,4 +97,30 @@ FROM Books
 GROUP BY Genre
 ORDER BY NumberOfBooks DESC;
 
+-- Retrieve the titles of books along with their authors, sorted by the author's last name, then by the book title alphabetically.
+SELECT B.Title, A.LastName, A.FirstName
+FROM Books B
+JOIN Authors A ON B.AuthorID = A.AuthorID
+ORDER BY A.LastName ASC, B.Title ASC;
 
+-- Retrieve a list of customers sorted by the number of orders they have placed, in descending order.
+SELECT C.FirstName, C.LastName, COUNT(O.OrderID) AS NumberOfOrders
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+GROUP BY C.CustomerID, C.FirstName, C.LastName
+ORDER BY NumberOfOrders DESC;
+
+-- Retrieve a list of books sorted by the number of orders placed for each book, in descending order.
+SELECT B.Title, COUNT(O.OrderID) AS NumberOfOrders
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY B.Title
+ORDER BY NumberOfOrders DESC;
+
+-- Retrieve the names of customers who have placed at least one order, grouped by customer name and sorted by their total spending in descending order.
+SELECT C.FirstName, C.LastName, SUM(O.Quantity * B.Price) AS TotalSpent
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY C.FirstName, C.LastName
+ORDER BY TotalSpent DESC
