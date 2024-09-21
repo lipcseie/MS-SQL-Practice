@@ -123,4 +123,11 @@ FROM Customers C
 JOIN Orders O ON C.CustomerID = O.CustomerID
 JOIN Books B ON O.BookID = B.BookID
 GROUP BY C.FirstName, C.LastName
-ORDER BY TotalSpent DESC
+ORDER BY TotalSpent DESC;
+
+-- Retrieve the list of genres along with the number of distinct authors who have written in each genre, sorted by the number of authors in descending order.
+SELECT B.Genre, COUNT(DISTINCT A.AuthorID) AS NumberOfAuthors
+FROM Books B
+JOIN Authors A ON B.AuthorID = A.AuthorID
+GROUP BY B.Genre
+ORDER BY NumberOfAuthors DESC;
