@@ -131,3 +131,10 @@ FROM Books B
 JOIN Authors A ON B.AuthorID = A.AuthorID
 GROUP BY B.Genre
 ORDER BY NumberOfAuthors DESC;
+
+-- Retrieve the titles of books and the total quantity ordered for each book, grouped by title and sorted by total quantity in ascending order.
+SELECT B.Title, SUM(O.Quantity) AS TotalQuantityOrdered
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY B.Title
+ORDER BY TotalQuantityOrdered ASC;
