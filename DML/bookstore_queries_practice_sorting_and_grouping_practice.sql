@@ -138,3 +138,10 @@ FROM Books B
 JOIN Orders O ON B.BookID = O.BookID
 GROUP BY B.Title
 ORDER BY TotalQuantityOrdered ASC;
+
+-- Retrieve the names of authors and the total number of genres they have written in, grouped by author and sorted by the number of genres in descending order.
+SELECT A.FirstName, A.LastName, COUNT(DISTINCT B.Genre) AS NumberOfGenres
+FROM Authors A
+JOIN Books B ON A.AuthorID = B.AuthorID
+GROUP BY A.FirstName, A.LastName
+ORDER BY NumberOfGenres DESC;
