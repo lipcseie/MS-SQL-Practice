@@ -145,3 +145,9 @@ FROM Authors A
 JOIN Books B ON A.AuthorID = B.AuthorID
 GROUP BY A.FirstName, A.LastName
 ORDER BY NumberOfGenres DESC;
+
+-- Retrieve the number of books published per year, grouped by publication year and sorted in descending order of book count.
+SELECT B.PublicationYear, COUNT(B.BookID) AS NumberOfBooksPublished
+FROM Books B
+GROUP BY B.PublicationYear
+ORDER BY NumberOfBooksPublished DESC;
