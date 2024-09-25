@@ -151,3 +151,11 @@ SELECT B.PublicationYear, COUNT(B.BookID) AS NumberOfBooksPublished
 FROM Books B
 GROUP BY B.PublicationYear
 ORDER BY NumberOfBooksPublished DESC;
+
+-- Retrieve a list of publishers and the total number of authors they have worked with, sorted by the number of authors in descending order.
+SELECT P.Name AS PublisherName, COUNT(DISTINCT A.AuthorID) AS NumberOfAuthors
+FROM Publishers P
+JOIN Books B ON P.PublisherID = B.PublisherID
+JOIN Authors A ON B.AuthorID = A.AuthorID
+GROUP BY P.Name
+ORDER BY NumberOfAuthors DESC;
