@@ -159,3 +159,11 @@ JOIN Books B ON P.PublisherID = B.PublisherID
 JOIN Authors A ON B.AuthorID = A.AuthorID
 GROUP BY P.Name
 ORDER BY NumberOfAuthors DESC;
+
+-- Retrieve the total sales value for each customer, grouped by customer and sorted by total sales in ascending order.
+SELECT C.FirstName, C.LastName, SUM(O.Quantity * B.Price) AS TotalSales
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY C.FirstName, C.LastName
+ORDER BY TotalSales ASC;
