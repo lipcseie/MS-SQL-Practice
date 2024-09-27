@@ -167,3 +167,11 @@ JOIN Orders O ON C.CustomerID = O.CustomerID
 JOIN Books B ON O.BookID = B.BookID
 GROUP BY C.FirstName, C.LastName
 ORDER BY TotalSales ASC;
+
+-- Retrieve the number of distinct publishers each author has worked with, grouped by author and sorted by the number of publishers in descending order.
+SELECT A.FirstName, A.LastName, COUNT(DISTINCT P.PublisherID) AS NumberOfPublishers
+FROM Authors A
+JOIN Books B ON A.AuthorID = B.AuthorID
+JOIN Publishers P ON B.PublisherID = P.PublisherID
+GROUP BY A.FirstName, A.LastName
+ORDER BY NumberOfPublishers DESC;
