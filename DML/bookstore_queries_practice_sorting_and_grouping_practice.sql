@@ -175,3 +175,10 @@ JOIN Books B ON A.AuthorID = B.AuthorID
 JOIN Publishers P ON B.PublisherID = P.PublisherID
 GROUP BY A.FirstName, A.LastName
 ORDER BY NumberOfPublishers DESC;
+
+-- Retrieve the total sales value for each genre, grouped by genre and sorted by total sales in ascending order.
+SELECT B.Genre, SUM(O.Quantity * B.Price) AS TotalSales
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY B.Genre
+ORDER BY TotalSales ASC;
