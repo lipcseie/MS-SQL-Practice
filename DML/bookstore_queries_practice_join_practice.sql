@@ -133,3 +133,11 @@ SELECT B.Title AS BookTitle,
 FROM Books B
 JOIN Authors A ON B.AuthorID = A.AuthorID
 WHERE B.Genre != 'Science Fiction';
+
+-- Retrieve the total number of books sold by each author, grouped by author and sorted by the total number of books sold in descending order.
+SELECT A.FirstName, A.LastName, SUM(O.Quantity) AS TotalBooksSold
+FROM Authors A
+JOIN Books B ON A.AuthorID = B.AuthorID
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY A.FirstName, A.LastName
+ORDER BY TotalBooksSold DESC;
