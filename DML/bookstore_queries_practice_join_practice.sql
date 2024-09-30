@@ -141,3 +141,10 @@ JOIN Books B ON A.AuthorID = B.AuthorID
 JOIN Orders O ON B.BookID = O.BookID
 GROUP BY A.FirstName, A.LastName
 ORDER BY TotalBooksSold DESC;
+
+-- Retrieve the number of customers who have placed more than one order, grouped by customer.
+SELECT C.FirstName, C.LastName, COUNT(O.OrderID) AS NumberOfOrders
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+GROUP BY C.CustomerID, C.FirstName, C.LastName
+HAVING COUNT(O.OrderID) > 1;
