@@ -148,3 +148,11 @@ FROM Customers C
 JOIN Orders O ON C.CustomerID = O.CustomerID
 GROUP BY C.CustomerID, C.FirstName, C.LastName
 HAVING COUNT(O.OrderID) > 1;
+
+-- Retrieve the number of orders placed for each publisher, grouped by publisher and sorted by the number of orders in descending order.
+SELECT P.Name AS PublisherName, COUNT(O.OrderID) AS NumberOfOrders
+FROM Publishers P
+JOIN Books B ON P.PublisherID = B.PublisherID
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY P.Name
+ORDER BY NumberOfOrders DESC;
