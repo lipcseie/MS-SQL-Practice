@@ -156,3 +156,10 @@ JOIN Books B ON P.PublisherID = B.PublisherID
 JOIN Orders O ON B.BookID = O.BookID
 GROUP BY P.Name
 ORDER BY NumberOfOrders DESC;
+
+-- Retrieve the most recent book published by each author, grouped by author and sorted by the publication year in descending order.
+SELECT A.FirstName, A.LastName, MAX(B.PublicationYear) AS MostRecentBook
+FROM Authors A
+JOIN Books B ON A.AuthorID = B.AuthorID
+GROUP BY A.FirstName, A.LastName
+ORDER BY MostRecentBook DESC;
