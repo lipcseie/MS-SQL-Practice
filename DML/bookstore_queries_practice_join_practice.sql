@@ -163,3 +163,9 @@ FROM Authors A
 JOIN Books B ON A.AuthorID = B.AuthorID
 GROUP BY A.FirstName, A.LastName
 ORDER BY MostRecentBook DESC;
+
+-- Retrieve the total quantity of books ordered per order, grouped by order and sorted by the total quantity in descending order.
+SELECT O.OrderID, SUM(O.Quantity) AS TotalQuantity
+FROM Orders O
+GROUP BY O.OrderID
+ORDER BY TotalQuantity DESC;
