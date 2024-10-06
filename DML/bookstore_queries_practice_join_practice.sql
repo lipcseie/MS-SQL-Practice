@@ -169,3 +169,10 @@ SELECT O.OrderID, SUM(O.Quantity) AS TotalQuantity
 FROM Orders O
 GROUP BY O.OrderID
 ORDER BY TotalQuantity DESC;
+
+-- Retrieve the average price of books sold by each publisher, grouped by publisher and sorted by the average price in ascending order.
+SELECT P.Name AS PublisherName, AVG(B.Price) AS AveragePrice
+FROM Publishers P
+JOIN Books B ON P.PublisherID = B.PublisherID
+GROUP BY P.Name
+ORDER BY AveragePrice ASC;
