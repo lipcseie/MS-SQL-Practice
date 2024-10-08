@@ -176,3 +176,12 @@ FROM Publishers P
 JOIN Books B ON P.PublisherID = B.PublisherID
 GROUP BY P.Name
 ORDER BY AveragePrice ASC;
+
+-- Retrieve a list of customers who have spent more than the average total spending of all customers, sorted by their total spending.
+SELECT C.FirstName, C.LastName, SUM(O.Quantity * B.Price) AS TotalSpent
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY C.FirstName, C.LastName
+HAVING SUM(O.Quantity * B.Price) > (SELECT AVG(O.Quantity * B.Price) FROM Orders O JOIN Books B ON O.BookID = B.BookID)
+ORDER BY TotalSpent DESC;
