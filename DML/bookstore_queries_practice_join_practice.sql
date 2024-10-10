@@ -185,3 +185,10 @@ JOIN Books B ON O.BookID = B.BookID
 GROUP BY C.FirstName, C.LastName
 HAVING SUM(O.Quantity * B.Price) > (SELECT AVG(O.Quantity * B.Price) FROM Orders O JOIN Books B ON O.BookID = B.BookID)
 ORDER BY TotalSpent DESC;
+
+-- Retrieve the titles of books that have never been ordered, grouped by book title and sorted alphabetically.
+SELECT B.Title
+FROM Books B
+LEFT JOIN Orders O ON B.BookID = O.BookID
+WHERE O.OrderID IS NULL
+ORDER BY B.Title ASC;
