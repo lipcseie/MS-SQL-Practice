@@ -199,3 +199,12 @@ FROM Authors A
 JOIN Books B ON A.AuthorID = B.AuthorID
 GROUP BY A.FirstName, A.LastName
 ORDER BY NumberOfGenres DESC;
+
+-- Retrieve the names of customers who have ordered books from more than three different genres, grouped by customer name and sorted by their first name.
+SELECT C.FirstName, C.LastName, COUNT(DISTINCT B.Genre) AS NumberOfGenres
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY C.FirstName, C.LastName
+HAVING COUNT(DISTINCT B.Genre) > 3
+ORDER BY C.FirstName ASC;
