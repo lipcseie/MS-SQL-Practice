@@ -208,3 +208,10 @@ JOIN Books B ON O.BookID = B.BookID
 GROUP BY C.FirstName, C.LastName
 HAVING COUNT(DISTINCT B.Genre) > 3
 ORDER BY C.FirstName ASC;
+
+-- Retrieve the total number of books each author has written, sorted by author name in ascending order.
+SELECT A.FirstName, A.LastName, COUNT(B.BookID) AS NumberOfBooks
+FROM Authors A
+JOIN Books B ON A.AuthorID = B.AuthorID
+GROUP BY A.FirstName, A.LastName
+ORDER BY A.LastName ASC, A.FirstName ASC;
