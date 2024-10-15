@@ -215,3 +215,10 @@ FROM Authors A
 JOIN Books B ON A.AuthorID = B.AuthorID
 GROUP BY A.FirstName, A.LastName
 ORDER BY A.LastName ASC, A.FirstName ASC;
+
+-- Retrieve the number of books published by each publisher in each year, grouped by publisher and publication year, and sorted by the publisher's name and year.
+SELECT P.Name AS PublisherName, B.PublicationYear, COUNT(B.BookID) AS BooksPublished
+FROM Publishers P
+JOIN Books B ON P.PublisherID = B.PublisherID
+GROUP BY P.Name, B.PublicationYear
+ORDER BY P.Name ASC, B.PublicationYear ASC;
