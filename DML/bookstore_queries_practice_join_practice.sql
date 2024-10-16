@@ -222,3 +222,11 @@ FROM Publishers P
 JOIN Books B ON P.PublisherID = B.PublisherID
 GROUP BY P.Name, B.PublicationYear
 ORDER BY P.Name ASC, B.PublicationYear ASC;
+
+-- Retrieve a list of customers who have placed more than 5 orders, grouped by customer and sorted by the number of orders in descending order.
+SELECT C.FirstName, C.LastName, COUNT(O.OrderID) AS NumberOfOrders
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+GROUP BY C.FirstName, C.LastName
+HAVING COUNT(O.OrderID) > 5
+ORDER BY NumberOfOrders DESC;
