@@ -230,3 +230,10 @@ JOIN Orders O ON C.CustomerID = O.CustomerID
 GROUP BY C.FirstName, C.LastName
 HAVING COUNT(O.OrderID) > 5
 ORDER BY NumberOfOrders DESC;
+
+-- Retrieve the total number of distinct genres each publisher has published, sorted by publisher name in ascending order.
+SELECT P.Name AS PublisherName, COUNT(DISTINCT B.Genre) AS NumberOfGenres
+FROM Publishers P
+JOIN Books B ON P.PublisherID = B.PublisherID
+GROUP BY P.Name
+ORDER BY P.Name ASC;
