@@ -237,3 +237,11 @@ FROM Publishers P
 JOIN Books B ON P.PublisherID = B.PublisherID
 GROUP BY P.Name
 ORDER BY P.Name ASC;
+
+-- Retrieve a list of books published after the year 2000, sorted by the number of orders they have received in descending order.
+SELECT B.Title, B.PublicationYear, COUNT(O.OrderID) AS NumberOfOrders
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+WHERE B.PublicationYear > 2000
+GROUP BY B.Title, B.PublicationYear
+ORDER BY NumberOfOrders DESC;
