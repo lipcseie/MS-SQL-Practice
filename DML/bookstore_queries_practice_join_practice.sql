@@ -245,3 +245,10 @@ JOIN Orders O ON B.BookID = O.BookID
 WHERE B.PublicationYear > 2000
 GROUP BY B.Title, B.PublicationYear
 ORDER BY NumberOfOrders DESC;
+
+-- Retrieve the total number of pages for all books written by each author, sorted by the total pages in descending order.
+SELECT A.FirstName, A.LastName, SUM(B.Pages) AS TotalPages
+FROM Authors A
+JOIN Books B ON A.AuthorID = B.AuthorID
+GROUP BY A.FirstName, A.LastName
+ORDER BY TotalPages DESC;
