@@ -252,3 +252,11 @@ FROM Authors A
 JOIN Books B ON A.AuthorID = B.AuthorID
 GROUP BY A.FirstName, A.LastName
 ORDER BY TotalPages DESC;
+
+-- Retrieve the names of publishers who have published more than 10 books, sorted by the number of books in descending order.
+SELECT P.Name AS PublisherName, COUNT(B.BookID) AS NumberOfBooksPublished
+FROM Publishers P
+JOIN Books B ON P.PublisherID = B.PublisherID
+GROUP BY P.Name
+HAVING COUNT(B.BookID) > 10
+ORDER BY NumberOfBooksPublished DESC;
