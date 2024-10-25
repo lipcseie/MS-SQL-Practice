@@ -260,3 +260,11 @@ JOIN Books B ON P.PublisherID = B.PublisherID
 GROUP BY P.Name
 HAVING COUNT(B.BookID) > 10
 ORDER BY NumberOfBooksPublished DESC;
+
+-- Retrieve the titles of books that have been ordered more than 50 times, sorted by the number of orders in ascending order.
+SELECT B.Title, COUNT(O.OrderID) AS NumberOfOrders
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY B.Title
+HAVING COUNT(O.OrderID) > 50
+ORDER BY NumberOfOrders ASC;
