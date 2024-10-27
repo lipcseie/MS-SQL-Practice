@@ -268,3 +268,11 @@ JOIN Orders O ON B.BookID = O.BookID
 GROUP BY B.Title
 HAVING COUNT(O.OrderID) > 50
 ORDER BY NumberOfOrders ASC;
+
+-- Retrieve the names of authors who have written books in more than 3 different genres, sorted by the number of genres in descending order.
+SELECT A.FirstName, A.LastName, COUNT(DISTINCT B.Genre) AS NumberOfGenres
+FROM Authors A
+JOIN Books B ON A.AuthorID = B.AuthorID
+GROUP BY A.FirstName, A.LastName
+HAVING COUNT(DISTINCT B.Genre) > 3
+ORDER BY NumberOfGenres DESC;
