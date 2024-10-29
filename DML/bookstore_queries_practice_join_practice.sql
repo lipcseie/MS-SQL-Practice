@@ -284,3 +284,12 @@ JOIN Books B ON P.PublisherID = B.PublisherID
 JOIN Orders O ON B.BookID = O.BookID
 GROUP BY P.Name
 ORDER BY TotalRevenue DESC;
+
+-- Retrieve a list of authors who have collaborated with multiple publishers, sorted by the number of publishers in descending order.
+SELECT A.FirstName, A.LastName, COUNT(DISTINCT P.PublisherID) AS NumberOfPublishers
+FROM Authors A
+JOIN Books B ON A.AuthorID = B.AuthorID
+JOIN Publishers P ON B.PublisherID = P.PublisherID
+GROUP BY A.FirstName, A.LastName
+HAVING COUNT(DISTINCT P.PublisherID) > 1
+ORDER BY NumberOfPublishers DESC;
