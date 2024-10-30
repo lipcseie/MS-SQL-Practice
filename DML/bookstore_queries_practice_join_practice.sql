@@ -293,3 +293,9 @@ JOIN Publishers P ON B.PublisherID = P.PublisherID
 GROUP BY A.FirstName, A.LastName
 HAVING COUNT(DISTINCT P.PublisherID) > 1
 ORDER BY NumberOfPublishers DESC;
+
+-- Retrieve the average price of books for each publication year, sorted by publication year in ascending order.
+SELECT B.PublicationYear, AVG(B.Price) AS AveragePrice
+FROM Books B
+GROUP BY B.PublicationYear
+ORDER BY B.PublicationYear ASC;
