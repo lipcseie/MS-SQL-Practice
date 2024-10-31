@@ -299,3 +299,10 @@ SELECT B.PublicationYear, AVG(B.Price) AS AveragePrice
 FROM Books B
 GROUP BY B.PublicationYear
 ORDER BY B.PublicationYear ASC;
+
+-- Retrieve the titles of books and the number of times they have been ordered in each genre, grouped by genre and sorted by order count in descending order.
+SELECT B.Genre, B.Title, COUNT(O.OrderID) AS OrderCount
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY B.Genre, B.Title
+ORDER BY B.Genre ASC, OrderCount DESC;
