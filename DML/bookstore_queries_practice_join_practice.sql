@@ -306,3 +306,12 @@ FROM Books B
 JOIN Orders O ON B.BookID = O.BookID
 GROUP BY B.Genre, B.Title
 ORDER BY B.Genre ASC, OrderCount DESC;
+
+-- Retrieve the names of customers who have ordered books in every genre available, sorted by last name.
+SELECT C.FirstName, C.LastName
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY C.CustomerID, C.FirstName, C.LastName
+HAVING COUNT(DISTINCT B.Genre) = (SELECT COUNT(DISTINCT Genre) FROM Books)
+ORDER BY C.LastName ASC, C.FirstName ASC;
