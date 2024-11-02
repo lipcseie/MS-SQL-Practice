@@ -315,3 +315,11 @@ JOIN Books B ON O.BookID = B.BookID
 GROUP BY C.CustomerID, C.FirstName, C.LastName
 HAVING COUNT(DISTINCT B.Genre) = (SELECT COUNT(DISTINCT Genre) FROM Books)
 ORDER BY C.LastName ASC, C.FirstName ASC;
+
+-- Retrieve the total quantity of books ordered by each customer for each genre, sorted by genre and then by quantity in descending order.
+SELECT C.FirstName, C.LastName, B.Genre, SUM(O.Quantity) AS TotalQuantity
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY C.FirstName, C.LastName, B.Genre
+ORDER BY B.Genre ASC, TotalQuantity DESC;
