@@ -332,3 +332,12 @@ JOIN (
     FROM Books
     GROUP BY Genre
 ) AS MaxPrices ON B.Genre = MaxPrices.Genre AND B.Price = MaxPrices.MaxPrice;
+
+-- Retrieve the list of customers who have ordered the same book more than once, sorted by customer name.
+SELECT C.FirstName, C.LastName, B.Title, COUNT(O.OrderID) AS OrderCount
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY C.FirstName, C.LastName, B.Title
+HAVING COUNT(O.OrderID) > 1
+ORDER BY C.LastName ASC, C.FirstName ASC;
