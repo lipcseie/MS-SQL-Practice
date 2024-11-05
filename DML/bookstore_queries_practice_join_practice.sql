@@ -341,3 +341,10 @@ JOIN Books B ON O.BookID = B.BookID
 GROUP BY C.FirstName, C.LastName, B.Title
 HAVING COUNT(O.OrderID) > 1
 ORDER BY C.LastName ASC, C.FirstName ASC;
+
+-- Retrieve the list of books that have never been ordered, sorted alphabetically by title.
+SELECT B.Title
+FROM Books B
+LEFT JOIN Orders O ON B.BookID = O.BookID
+WHERE O.OrderID IS NULL
+ORDER BY B.Title ASC;
