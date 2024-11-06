@@ -348,3 +348,10 @@ FROM Books B
 LEFT JOIN Orders O ON B.BookID = O.BookID
 WHERE O.OrderID IS NULL
 ORDER BY B.Title ASC;
+
+-- Retrieve the total number of books ordered by each customer, grouped by customer, and sorted by the total number of books in descending order.
+SELECT C.FirstName, C.LastName, SUM(O.Quantity) AS TotalBooksOrdered
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+GROUP BY C.FirstName, C.LastName
+ORDER BY TotalBooksOrdered DESC;
