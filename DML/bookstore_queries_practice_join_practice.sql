@@ -355,3 +355,10 @@ FROM Customers C
 JOIN Orders O ON C.CustomerID = O.CustomerID
 GROUP BY C.FirstName, C.LastName
 ORDER BY TotalBooksOrdered DESC;
+
+-- Retrieve the books that have been ordered by the highest number of unique customers, sorted by order count in descending order.
+SELECT B.Title, COUNT(DISTINCT O.CustomerID) AS UniqueCustomers
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY B.BookID
+ORDER BY UniqueCustomers DESC;
