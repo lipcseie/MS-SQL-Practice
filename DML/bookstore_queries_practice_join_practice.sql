@@ -362,3 +362,10 @@ FROM Books B
 JOIN Orders O ON B.BookID = O.BookID
 GROUP BY B.BookID
 ORDER BY UniqueCustomers DESC;
+
+-- Retrieve the authors who have written books in the highest number of genres, sorted by the number of genres in descending order.
+SELECT A.FirstName, A.LastName, COUNT(DISTINCT B.Genre) AS NumberOfGenres
+FROM Authors A
+JOIN Books B ON A.AuthorID = B.AuthorID
+GROUP BY A.FirstName, A.LastName
+ORDER BY NumberOfGenres DESC;
