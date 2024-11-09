@@ -369,3 +369,10 @@ FROM Authors A
 JOIN Books B ON A.AuthorID = B.AuthorID
 GROUP BY A.FirstName, A.LastName
 ORDER BY NumberOfGenres DESC;
+
+-- Retrieve the books that have the highest total sales, sorted by total sales value in descending order.
+SELECT B.Title, SUM(O.Quantity * B.Price) AS TotalSales
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY B.BookID
+ORDER BY TotalSales DESC;
