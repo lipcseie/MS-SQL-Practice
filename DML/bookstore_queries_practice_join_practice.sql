@@ -376,3 +376,13 @@ FROM Books B
 JOIN Orders O ON B.BookID = O.BookID
 GROUP BY B.BookID
 ORDER BY TotalSales DESC;
+
+-- Retrieve the most expensive book in each genre, showing the genre, title, and price.
+SELECT B.Genre, B.Title, B.Price
+FROM Books B
+JOIN (
+    SELECT Genre, MAX(Price) AS MaxPrice
+    FROM Books
+    GROUP BY Genre
+     ) 
+AS MaxPriceBooks ON B.Genre = MaxPriceBooks.Genre AND B.Price = MaxPriceBooks.MaxPrice;
