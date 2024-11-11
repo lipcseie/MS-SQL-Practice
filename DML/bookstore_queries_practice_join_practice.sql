@@ -386,3 +386,12 @@ JOIN (
     GROUP BY Genre
      ) 
 AS MaxPriceBooks ON B.Genre = MaxPriceBooks.Genre AND B.Price = MaxPriceBooks.MaxPrice;
+
+-- Retrieve a list of customers who have ordered books worth more than a specific total value (e.g., $500), sorted by total spending.
+SELECT C.FirstName, C.LastName, SUM(O.Quantity * B.Price) AS TotalSpent
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY C.FirstName, C.LastName
+HAVING SUM(O.Quantity * B.Price) > 500
+ORDER BY TotalSpent DESC;
