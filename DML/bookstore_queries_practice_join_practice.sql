@@ -395,3 +395,11 @@ JOIN Books B ON O.BookID = B.BookID
 GROUP BY C.FirstName, C.LastName
 HAVING SUM(O.Quantity * B.Price) > 500
 ORDER BY TotalSpent DESC;
+
+-- Retrieve the number of books ordered by each publisher, grouped by publisher, and sorted by the total number of books ordered in descending order.
+SELECT P.Name AS PublisherName, SUM(O.Quantity) AS TotalBooksOrdered
+FROM Publishers P
+JOIN Books B ON P.PublisherID = B.PublisherID
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY P.Name
+ORDER BY TotalBooksOrdered DESC;
