@@ -403,3 +403,11 @@ JOIN Books B ON P.PublisherID = B.PublisherID
 JOIN Orders O ON B.BookID = O.BookID
 GROUP BY P.Name
 ORDER BY TotalBooksOrdered DESC;
+
+-- Retrieve the total number of books ordered by customers who placed their orders in the last 30 days, grouped by customer and sorted by total quantity.
+SELECT C.FirstName, C.LastName, SUM(O.Quantity) AS TotalQuantity
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+WHERE O.OrderDate > CURDATE() - INTERVAL 30 DAY
+GROUP BY C.CustomerID
+ORDER BY TotalQuantity DESC;
