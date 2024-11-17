@@ -324,7 +324,10 @@ JOIN Books B ON O.BookID = B.BookID
 GROUP BY C.FirstName, C.LastName, B.Genre
 ORDER BY B.Genre ASC, TotalQuantity DESC;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1f70a2d6c1efc294975c74442700582e59d32001
 -- Retrieve the titles of the most expensive books for each genre.
 SELECT B.Genre, B.Title, B.Price
 FROM Books B
@@ -332,4 +335,87 @@ JOIN (
     SELECT Genre, MAX(Price) AS MaxPrice
     FROM Books
     GROUP BY Genre
+<<<<<<< HEAD
 ) AS MaxPrices ON B.Genre = MaxPrices.Genre AND B.Price = MaxPrices.MaxPrice;
+=======
+) AS MaxPrices ON B.Genre = MaxPrices.Genre AND B.Price = MaxPrices.MaxPrice;
+
+-- Retrieve the list of customers who have ordered the same book more than once, sorted by customer name.
+SELECT C.FirstName, C.LastName, B.Title, COUNT(O.OrderID) AS OrderCount
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY C.FirstName, C.LastName, B.Title
+HAVING COUNT(O.OrderID) > 1
+ORDER BY C.LastName ASC, C.FirstName ASC;
+
+-- Retrieve the list of books that have never been ordered, sorted alphabetically by title.
+SELECT B.Title
+FROM Books B
+LEFT JOIN Orders O ON B.BookID = O.BookID
+WHERE O.OrderID IS NULL
+ORDER BY B.Title ASC;
+
+-- Retrieve the total number of books ordered by each customer, grouped by customer, and sorted by the total number of books in descending order.
+SELECT C.FirstName, C.LastName, SUM(O.Quantity) AS TotalBooksOrdered
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+GROUP BY C.FirstName, C.LastName
+ORDER BY TotalBooksOrdered DESC;
+
+-- Retrieve the books that have been ordered by the highest number of unique customers, sorted by order count in descending order.
+SELECT B.Title, COUNT(DISTINCT O.CustomerID) AS UniqueCustomers
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY B.BookID
+ORDER BY UniqueCustomers DESC;
+
+-- Retrieve the authors who have written books in the highest number of genres, sorted by the number of genres in descending order.
+SELECT A.FirstName, A.LastName, COUNT(DISTINCT B.Genre) AS NumberOfGenres
+FROM Authors A
+JOIN Books B ON A.AuthorID = B.AuthorID
+GROUP BY A.FirstName, A.LastName
+ORDER BY NumberOfGenres DESC;
+
+-- Retrieve the books that have the highest total sales, sorted by total sales value in descending order.
+SELECT B.Title, SUM(O.Quantity * B.Price) AS TotalSales
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY B.BookID
+ORDER BY TotalSales DESC;
+
+-- Retrieve the most expensive book in each genre, showing the genre, title, and price.
+SELECT B.Genre, B.Title, B.Price
+FROM Books B
+JOIN (
+    SELECT Genre, MAX(Price) AS MaxPrice
+    FROM Books
+    GROUP BY Genre
+     ) 
+AS MaxPriceBooks ON B.Genre = MaxPriceBooks.Genre AND B.Price = MaxPriceBooks.MaxPrice;
+
+-- Retrieve a list of customers who have ordered books worth more than a specific total value (e.g., $500), sorted by total spending.
+SELECT C.FirstName, C.LastName, SUM(O.Quantity * B.Price) AS TotalSpent
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY C.FirstName, C.LastName
+HAVING SUM(O.Quantity * B.Price) > 500
+ORDER BY TotalSpent DESC;
+
+-- Retrieve the number of books ordered by each publisher, grouped by publisher, and sorted by the total number of books ordered in descending order.
+SELECT P.Name AS PublisherName, SUM(O.Quantity) AS TotalBooksOrdered
+FROM Publishers P
+JOIN Books B ON P.PublisherID = B.PublisherID
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY P.Name
+ORDER BY TotalBooksOrdered DESC;
+
+-- Retrieve the total sales for each author, including the total number of books sold and the total revenue, sorted by total sales in descending order.
+SELECT A.FirstName, A.LastName, COUNT(O.OrderID) AS TotalBooksSold, SUM(O.Quantity * B.Price) AS TotalRevenue
+FROM Authors A
+JOIN Books B ON A.AuthorID = B.AuthorID
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY A.AuthorID
+ORDER BY TotalRevenue DESC;
+>>>>>>> 1f70a2d6c1efc294975c74442700582e59d32001
