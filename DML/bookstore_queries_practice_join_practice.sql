@@ -323,3 +323,13 @@ JOIN Orders O ON C.CustomerID = O.CustomerID
 JOIN Books B ON O.BookID = B.BookID
 GROUP BY C.FirstName, C.LastName, B.Genre
 ORDER BY B.Genre ASC, TotalQuantity DESC;
+
+
+-- Retrieve the titles of the most expensive books for each genre.
+SELECT B.Genre, B.Title, B.Price
+FROM Books B
+JOIN (
+    SELECT Genre, MAX(Price) AS MaxPrice
+    FROM Books
+    GROUP BY Genre
+) AS MaxPrices ON B.Genre = MaxPrices.Genre AND B.Price = MaxPrices.MaxPrice;
