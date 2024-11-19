@@ -418,4 +418,11 @@ JOIN Books B ON A.AuthorID = B.AuthorID
 JOIN Orders O ON B.BookID = O.BookID
 GROUP BY A.AuthorID
 ORDER BY TotalRevenue DESC;
->>>>>>> 1f70a2d6c1efc294975c74442700582e59d32001
+
+-- Retrieve the average price of books written by each author, grouped by author, and sorted by average price in descending order.
+SELECT A.FirstName, A.LastName, AVG(B.Price) AS AverageBookPrice
+FROM Authors A
+JOIN Books B ON A.AuthorID = B.AuthorID
+GROUP BY A.FirstName, A.LastName
+ORDER BY AverageBookPrice DESC;
+
