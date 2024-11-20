@@ -426,3 +426,11 @@ JOIN Books B ON A.AuthorID = B.AuthorID
 GROUP BY A.FirstName, A.LastName
 ORDER BY AverageBookPrice DESC;
 
+-- Retrieve the top 5 customers who have placed the most expensive single orders, showing the customer name and the highest order value.
+SELECT C.FirstName, C.LastName, MAX(O.Quantity * B.Price) AS HighestOrderValue
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY C.CustomerID
+ORDER BY HighestOrderValue DESC
+LIMIT 5;
