@@ -433,3 +433,10 @@ JOIN Books B ON P.PublisherID = B.PublisherID
 JOIN Orders O ON B.BookID = O.BookID
 GROUP BY P.Name
 ORDER BY TotalRevenue DESC;
+
+-- Retrieve a list of genres where the average book price is higher than the overall average price of all books.
+SELECT B.Genre, AVG(B.Price) AS AverageGenrePrice
+FROM Books B
+GROUP BY B.Genre
+HAVING AVG(B.Price) > (SELECT AVG(Price) FROM Books)
+ORDER BY AverageGenrePrice DESC;
