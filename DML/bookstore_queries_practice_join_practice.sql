@@ -440,3 +440,9 @@ FROM Books B
 GROUP BY B.Genre
 HAVING AVG(B.Price) > (SELECT AVG(Price) FROM Books)
 ORDER BY AverageGenrePrice DESC;
+
+-- Retrieve the names of customers who have never placed an order.
+SELECT C.FirstName, C.LastName
+FROM Customers C
+LEFT JOIN Orders O ON C.CustomerID = O.CustomerID
+WHERE O.OrderID IS NULL;
