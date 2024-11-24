@@ -446,3 +446,10 @@ SELECT C.FirstName, C.LastName
 FROM Customers C
 LEFT JOIN Orders O ON C.CustomerID = O.CustomerID
 WHERE O.OrderID IS NULL;
+
+-- Retrieve the list of books that have never been ordered, sorted by title.
+SELECT Title
+FROM Books B
+LEFT JOIN Orders O ON B.BookID = O.BookID
+WHERE O.OrderID IS NULL
+ORDER BY B.Title;
