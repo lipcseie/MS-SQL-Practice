@@ -453,3 +453,10 @@ FROM Books B
 LEFT JOIN Orders O ON B.BookID = O.BookID
 WHERE O.OrderID IS NULL
 ORDER BY B.Title;
+
+-- Retrieve the total number of books sold for each year, grouped by year and sorted in descending order.
+SELECT YEAR(O.OrderDate) AS OrderYear, SUM(O.Quantity) AS TotalBooksSold
+FROM Orders O
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY YEAR(O.OrderDate)
+ORDER BY TotalBooksSold DESC;
