@@ -460,3 +460,11 @@ FROM Orders O
 JOIN Books B ON O.BookID = B.BookID
 GROUP BY YEAR(O.OrderDate)
 ORDER BY TotalBooksSold DESC;
+
+-- Retrieve the most recent order for each customer, showing the customer name, order date, and book title.
+SELECT C.FirstName, C.LastName, MAX(O.OrderDate) AS MostRecentOrder, B.Title
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY C.CustomerID, B.Title
+ORDER BY MostRecentOrder DESC;
