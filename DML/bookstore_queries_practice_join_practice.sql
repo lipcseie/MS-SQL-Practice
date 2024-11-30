@@ -417,3 +417,10 @@ JOIN Books B ON A.AuthorID = B.AuthorID
 GROUP BY A.AuthorID, A.FirstName, A.LastName
 HAVING COUNT(DISTINCT B.Genre) > 1
 ORDER BY NumberOfGenres DESC;
+
+-- Retrieve a list of customers along with the date of their first order.
+SELECT C.FirstName, C.LastName, MIN(O.OrderDate) AS FirstOrderDate
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+GROUP BY C.CustomerID, C.FirstName, C.LastName
+ORDER BY FirstOrderDate ASC;
