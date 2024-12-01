@@ -424,3 +424,12 @@ FROM Customers C
 JOIN Orders O ON C.CustomerID = O.CustomerID
 GROUP BY C.CustomerID, C.FirstName, C.LastName
 ORDER BY FirstOrderDate ASC;
+
+-- Retrieve the names of authors who have written books in multiple genres, sorted by the number of genres.
+SELECT A.FirstName, A.LastName, COUNT(DISTINCT B.Genre) AS NumberOfGenres
+FROM Authors A
+JOIN Books B ON A.AuthorID = B.AuthorID
+GROUP BY A.AuthorID, A.FirstName, A.LastName
+HAVING COUNT(DISTINCT B.Genre) > 1
+ORDER BY NumberOfGenres DESC;
+
