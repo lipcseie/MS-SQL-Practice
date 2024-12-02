@@ -433,3 +433,11 @@ GROUP BY A.AuthorID, A.FirstName, A.LastName
 HAVING COUNT(DISTINCT B.Genre) > 1
 ORDER BY NumberOfGenres DESC;
 
+
+-- Retrieve the list of customers who have placed orders every month in the current year.
+SELECT C.FirstName, C.LastName
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+WHERE YEAR(O.OrderDate) = YEAR(GETDATE())  -- Use GETDATE() for SQL Server or SYSDATE for Oracle
+GROUP BY C.CustomerID, C.FirstName, C.LastName
+HAVING COUNT(DISTINCT MONTH(O.OrderDate)) = 12;
