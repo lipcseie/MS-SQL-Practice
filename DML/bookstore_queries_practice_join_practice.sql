@@ -449,3 +449,11 @@ JOIN Books B ON O.BookID = B.BookID
 WHERE YEAR(O.OrderDate) = YEAR(GETDATE())
 GROUP BY MONTH(O.OrderDate)
 ORDER BY Month ASC;
+
+-- Retrieve the list of books that have been ordered by at least 10 different customers.
+SELECT B.Title, COUNT(DISTINCT O.CustomerID) AS UniqueCustomers
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY B.BookID, B.Title  
+HAVING COUNT(DISTINCT O.CustomerID) >= 10
+ORDER BY UniqueCustomers DESC;
