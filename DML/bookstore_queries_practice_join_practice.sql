@@ -457,3 +457,10 @@ JOIN Orders O ON B.BookID = O.BookID
 GROUP BY B.BookID, B.Title  
 HAVING COUNT(DISTINCT O.CustomerID) >= 10
 ORDER BY UniqueCustomers DESC;
+
+-- Retrieve the top 5 most expensive books along with their authors and publishers.
+SELECT TOP 5 B.Title, B.Price, A.FirstName AS AuthorFirstName, A.LastName AS AuthorLastName, P.Name AS PublisherName
+FROM Books B
+JOIN Authors A ON B.AuthorID = A.AuthorID
+JOIN Publishers P ON B.PublisherID = P.PublisherID
+ORDER BY B.Price DESC;
