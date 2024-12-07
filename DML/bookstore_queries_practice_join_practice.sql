@@ -464,3 +464,9 @@ FROM Books B
 JOIN Authors A ON B.AuthorID = A.AuthorID
 JOIN Publishers P ON B.PublisherID = P.PublisherID
 ORDER BY B.Price DESC;
+
+-- Retrieve a list of genres along with the average book price and the total number of books in each genre, sorted by average price in descending order.
+SELECT B.Genre, AVG(B.Price) AS AveragePrice, COUNT(B.BookID) AS TotalBooks
+FROM Books B
+GROUP BY B.Genre
+ORDER BY AveragePrice DESC;
