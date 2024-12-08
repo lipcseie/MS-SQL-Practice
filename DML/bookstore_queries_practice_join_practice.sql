@@ -470,3 +470,14 @@ SELECT B.Genre, AVG(B.Price) AS AveragePrice, COUNT(B.BookID) AS TotalBooks
 FROM Books B
 GROUP BY B.Genre
 ORDER BY AveragePrice DESC;
+
+-- Retrieve the top 5 customers who have spent the most on orders, along with the total amount they spent.
+SELECT TOP 5 
+    C.FirstName, 
+    C.LastName, 
+    SUM(O.Quantity * B.Price) AS TotalSpent
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY C.CustomerID, C.FirstName, C.LastName
+ORDER BY TotalSpent DESC;
