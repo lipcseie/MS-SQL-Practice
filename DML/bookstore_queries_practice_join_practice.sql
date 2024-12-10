@@ -481,3 +481,13 @@ JOIN Orders O ON C.CustomerID = O.CustomerID
 JOIN Books B ON O.BookID = B.BookID
 GROUP BY C.CustomerID, C.FirstName, C.LastName
 ORDER BY TotalSpent DESC;
+
+-- Retrieve the average price of books for each publisher, only including publishers with at least 5 books published, sorted by average price in descending order.
+SELECT 
+    P.Name AS PublisherName, 
+    AVG(B.Price) AS AverageBookPrice
+FROM Publishers P
+JOIN Books B ON P.PublisherID = B.PublisherID
+GROUP BY P.Name
+HAVING COUNT(B.BookID) >= 5
+ORDER BY AverageBookPrice DESC;
