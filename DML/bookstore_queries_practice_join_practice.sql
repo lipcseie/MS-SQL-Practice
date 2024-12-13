@@ -491,3 +491,16 @@ JOIN Books B ON P.PublisherID = B.PublisherID
 GROUP BY P.Name
 HAVING COUNT(B.BookID) >= 5
 ORDER BY AverageBookPrice DESC;
+
+-- Retrieve the list of customers who have ordered the same book more than once, along with the book title and the total number of times it was ordered.
+SELECT 
+    C.FirstName, 
+    C.LastName, 
+    B.Title, 
+    SUM(O.Quantity) AS TotalQuantityOrdered
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY C.CustomerID, B.BookID, C.FirstName, C.LastName, B.Title
+HAVING SUM(O.Quantity) > 1
+ORDER BY TotalQuantityOrdered DESC;
