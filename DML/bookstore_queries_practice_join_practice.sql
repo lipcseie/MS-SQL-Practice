@@ -504,3 +504,14 @@ JOIN Books B ON O.BookID = B.BookID
 GROUP BY C.CustomerID, B.BookID, C.FirstName, C.LastName, B.Title
 HAVING SUM(O.Quantity) > 1
 ORDER BY TotalQuantityOrdered DESC;
+
+
+-- Retrieve the top 5 books with the highest total sales revenue, including their title and revenue
+SELECT TOP 5 
+    B.Title, 
+    SUM(O.Quantity * B.Price) AS TotalRevenue
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY B.BookID, B.Title
+ORDER BY TotalRevenue DESC;
+
