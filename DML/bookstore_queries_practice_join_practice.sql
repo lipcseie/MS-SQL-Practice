@@ -515,3 +515,12 @@ JOIN Orders O ON B.BookID = O.BookID
 GROUP BY B.BookID, B.Title
 ORDER BY TotalRevenue DESC;
 
+-- Retrieve the list of customers who have spent more than $500 total on orders in the current year.
+SELECT C.CustomerID, C.FirstName, C.LastName, SUM(O.Quantity * B.Price) AS TotalSpent
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+WHERE YEAR(O.OrderDate) = YEAR(GETDATE())
+GROUP BY C.CustomerID, C.FirstName, C.LastName
+HAVING SUM(O.Quantity * B.Price) > 500
+ORDER BY TotalSpent DESC;
