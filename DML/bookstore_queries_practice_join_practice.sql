@@ -524,3 +524,11 @@ WHERE YEAR(O.OrderDate) = YEAR(GETDATE())
 GROUP BY C.CustomerID, C.FirstName, C.LastName
 HAVING SUM(O.Quantity * B.Price) > 500
 ORDER BY TotalSpent DESC;
+
+-- Retrieve the top 5 best-selling books along with the total quantity sold.
+SELECT TOP 5 B.Title, SUM(O.Quantity) AS TotalSold
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY B.BookID, B.Title
+ORDER BY TotalSold DESC;
+
