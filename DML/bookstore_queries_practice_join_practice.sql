@@ -532,3 +532,9 @@ JOIN Orders O ON B.BookID = O.BookID
 GROUP BY B.BookID, B.Title
 ORDER BY TotalSold DESC;
 
+-- Retrieve the top 3 most active customers based on the number of orders they've placed, along with the total number of orders.
+SELECT TOP 3 C.FirstName, C.LastName, COUNT(O.OrderID) AS TotalOrders
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+GROUP BY C.CustomerID, C.FirstName, C.LastName
+ORDER BY TotalOrders DESC;
