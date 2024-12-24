@@ -538,3 +538,20 @@ FROM Customers C
 JOIN Orders O ON C.CustomerID = O.CustomerID
 GROUP BY C.CustomerID, C.FirstName, C.LastName
 ORDER BY TotalOrders DESC;
+
+-- Retrieve the names of customers who have spent more than the average order total across all customers.
+SELECT C.FirstName, C.LastName, SUM(O.Quantity * B.Price) AS TotalSpent
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY C.CustomerID, C.FirstName, C.LastName
+HAVING SUM(O.Quantity * B.Price) > (
+    SELECT AVG(Total)
+    FROM (
+        SELECT SUM(O.Quantity * B.Price) AS Total
+        FROM Orders O
+        JOIN Books B ON O.BookID = B.BookID
+        GROUP BY O.CustomerID
+    ) SubQuery
+)
+ORDER BY TotalSpent DESC;
