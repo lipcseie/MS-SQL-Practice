@@ -555,3 +555,12 @@ HAVING SUM(O.Quantity * B.Price) > (
     ) SubQuery
 )
 ORDER BY TotalSpent DESC;
+
+-- Retrieve the top 5 genres with the most books sold in the current year:
+SELECT TOP 5 B.Genre, SUM(O.Quantity) AS TotalBooksSold
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+WHERE YEAR(O.OrderDate) = YEAR(GETDATE())  
+GROUP BY B.Genre
+ORDER BY TotalBooksSold DESC;
+
