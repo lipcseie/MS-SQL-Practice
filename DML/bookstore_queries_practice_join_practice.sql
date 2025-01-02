@@ -581,3 +581,10 @@ JOIN Orders O ON C.CustomerID = O.CustomerID
 JOIN Books B ON O.BookID = B.BookID
 GROUP BY C.CustomerID, C.FirstName, C.LastName
 ORDER BY TotalSpent DESC;
+
+-- Retrieve the most popular book title (the one ordered the most times) along with the total quantity ordered.
+SELECT TOP 1 B.Title, SUM(O.Quantity) AS TotalOrdered
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY B.Title
+ORDER BY TotalOrdered DESC;
