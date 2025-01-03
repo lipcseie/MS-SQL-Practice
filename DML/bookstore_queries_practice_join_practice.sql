@@ -588,3 +588,11 @@ FROM Books B
 JOIN Orders O ON B.BookID = O.BookID
 GROUP BY B.Title
 ORDER BY TotalOrdered DESC;
+
+
+-- Retrieve the total number of orders placed by each customer and sort by the highest number of orders.
+SELECT C.FirstName, C.LastName, COUNT(O.OrderID) AS TotalOrders
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+GROUP BY C.CustomerID, C.FirstName, C.LastName
+ORDER BY TotalOrders DESC;
