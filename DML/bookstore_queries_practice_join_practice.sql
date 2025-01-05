@@ -596,3 +596,10 @@ FROM Customers C
 JOIN Orders O ON C.CustomerID = O.CustomerID
 GROUP BY C.CustomerID, C.FirstName, C.LastName
 ORDER BY TotalOrders DESC;
+
+-- Retrieve the average price of books for each genre, displaying genres with more than 5 books.
+SELECT B.Genre, AVG(B.Price) AS AveragePrice
+FROM Books B
+GROUP BY B.Genre
+HAVING COUNT(B.BookID) > 5
+ORDER BY AveragePrice DESC;
