@@ -612,3 +612,10 @@ WHERE YEAR(O.OrderDate) = YEAR(GETDATE())
 GROUP BY C.CustomerID, C.FirstName, C.LastName
 ORDER BY TotalOrders DESC;
 
+-- Retrieve the total number of books sold for each genre in the current year, sorted by the highest sales
+SELECT B.Genre, SUM(O.Quantity) AS TotalBooksSold
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+WHERE YEAR(O.OrderDate) = YEAR(GETDATE())
+GROUP BY B.Genre
+ORDER BY TotalBooksSold DESC;
