@@ -619,3 +619,9 @@ JOIN Orders O ON B.BookID = O.BookID
 WHERE YEAR(O.OrderDate) = YEAR(GETDATE())
 GROUP BY B.Genre
 ORDER BY TotalBooksSold DESC;
+
+-- Retrieve the average price of books for each genre, sorted by the highest average price.
+SELECT B.Genre, AVG(B.Price) AS AveragePrice
+FROM Books B
+GROUP BY B.Genre
+ORDER BY AveragePrice DESC;
