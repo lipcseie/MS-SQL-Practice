@@ -625,3 +625,12 @@ SELECT B.Genre, AVG(B.Price) AS AveragePrice
 FROM Books B
 GROUP BY B.Genre
 ORDER BY AveragePrice DESC;
+
+
+-- Retrieve the top 3 customers who have placed the most orders, along with the total number of orders they made.
+SELECT TOP 3 C.FirstName, C.LastName, COUNT(O.OrderID) AS TotalOrders
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+GROUP BY C.FirstName, C.LastName
+ORDER BY TotalOrders DESC;
+
