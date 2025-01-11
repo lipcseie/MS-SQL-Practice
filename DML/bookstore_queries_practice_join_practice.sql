@@ -634,3 +634,9 @@ JOIN Orders O ON C.CustomerID = O.CustomerID
 GROUP BY C.FirstName, C.LastName
 ORDER BY TotalOrders DESC;
 
+-- Retrieve the top 5 bestselling books along with their total sales quantity
+SELECT TOP 5 B.Title, SUM(O.Quantity) AS TotalSold
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY B.Title
+ORDER BY TotalSold DESC;
