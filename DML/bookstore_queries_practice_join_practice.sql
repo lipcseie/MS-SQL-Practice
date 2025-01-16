@@ -675,3 +675,12 @@ FROM Books B
 JOIN Orders O ON B.BookID = O.BookID
 GROUP BY B.Title
 ORDER BY TotalSold DESC;
+
+-- Retrieve the list of customers who have placed orders in both January and February of the current year.
+SELECT C.FirstName, C.LastName
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+WHERE YEAR(O.OrderDate) = YEAR(GETDATE())
+AND MONTH(O.OrderDate) IN (1, 2)
+GROUP BY C.CustomerID, C.FirstName, C.LastName
+HAVING COUNT(DISTINCT MONTH(O.OrderDate)) = 2;
