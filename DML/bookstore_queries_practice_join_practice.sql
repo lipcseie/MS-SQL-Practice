@@ -684,3 +684,11 @@ WHERE YEAR(O.OrderDate) = YEAR(GETDATE())
 AND MONTH(O.OrderDate) IN (1, 2)
 GROUP BY C.CustomerID, C.FirstName, C.LastName
 HAVING COUNT(DISTINCT MONTH(O.OrderDate)) = 2;
+
+-- Find the top 5 books with the highest revenue generated in the current year.
+SELECT TOP 5 B.Title, SUM(O.Quantity * B.Price) AS TotalRevenue
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+WHERE YEAR(O.OrderDate) = YEAR(GETDATE())  -- Filter for the current year
+GROUP BY B.Title
+ORDER BY TotalRevenue DESC;
