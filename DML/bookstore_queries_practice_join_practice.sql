@@ -692,3 +692,11 @@ JOIN Orders O ON B.BookID = O.BookID
 WHERE YEAR(O.OrderDate) = YEAR(GETDATE())  -- Filter for the current year
 GROUP BY B.Title
 ORDER BY TotalRevenue DESC;
+
+-- Retrieve the top 3 customers who placed the highest number of orders in the current year.
+SELECT TOP 3 C.FirstName, C.LastName, COUNT(O.OrderID) AS TotalOrders
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+WHERE YEAR(O.OrderDate) = YEAR(GETDATE())  -- Filter for the current year
+GROUP BY C.FirstName, C.LastName
+ORDER BY TotalOrders DESC;
