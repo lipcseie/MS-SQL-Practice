@@ -707,3 +707,13 @@ FROM Books B
 JOIN Orders O ON B.BookID = O.BookID
 GROUP BY B.Title
 ORDER BY TotalSold DESC;
+
+-- Retrieve the average order value for each customer who has placed at least 5 orders.
+SELECT C.FirstName, C.LastName, 
+AVG(O.Quantity * B.Price) AS AverageOrderValue
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY C.CustomerID, C.FirstName, C.LastName
+HAVING COUNT(O.OrderID) >= 5
+ORDER BY AverageOrderValue DESC;
