@@ -717,3 +717,12 @@ JOIN Books B ON O.BookID = B.BookID
 GROUP BY C.CustomerID, C.FirstName, C.LastName
 HAVING COUNT(O.OrderID) >= 5
 ORDER BY AverageOrderValue DESC;
+
+-- Top 5 Best-Selling Books by Revenue
+SELECT TOP 5 B.Title AS BookTitle, 
+SUM(O.Quantity * B.Price) AS TotalRevenue
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+WHERE YEAR(O.OrderDate) = YEAR(GETDATE())  
+GROUP BY B.Title
+ORDER BY TotalRevenue DESC;  
