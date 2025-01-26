@@ -736,3 +736,14 @@ GROUP BY C.CustomerID,
 		C.FirstName, 
 		C.LastName
 ORDER BY TotalOrders DESC; 
+
+
+-- Top 3 Customers by Number of Orders
+SELECT TOP 3 
+    C.FirstName, 
+    C.LastName, 
+    COUNT(O.OrderID) AS TotalOrders
+FROM Customers C
+JOIN  Orders O ON C.CustomerID = O.CustomerID
+GROUP BY C.CustomerID, C.FirstName, C.LastName
+ORDER BY TotalOrders DESC;  
