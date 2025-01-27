@@ -747,3 +747,11 @@ FROM Customers C
 JOIN  Orders O ON C.CustomerID = O.CustomerID
 GROUP BY C.CustomerID, C.FirstName, C.LastName
 ORDER BY TotalOrders DESC;  
+
+-- Top 5 Genres by Revenue
+SELECT TOP 5  B.Genre, 
+SUM(O.Quantity * B.Price) AS TotalRevenue
+FROM Books B
+JOIN  Orders O ON B.BookID = O.BookID
+GROUP BY B.Genre
+ORDER BY TotalRevenue DESC; 
