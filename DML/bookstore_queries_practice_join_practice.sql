@@ -778,3 +778,11 @@ FROM Books B
 JOIN Orders O ON B.BookID = O.BookID
 GROUP BY  B.Title
 ORDER BY  TotalCopiesSold DESC;
+
+-- Retrieve Customers Who Have Placed Orders in the Last 30 Days
+SELECT C.CustomerID, C.FirstName, C.LastName, MAX(O.OrderDate) AS LastOrderDate  
+FROM Customers C
+JOIN  Orders O ON C.CustomerID = O.CustomerID
+WHERE O.OrderDate >= DATEADD(DAY, -30, GETDATE())
+GROUP BY C.CustomerID, C.FirstName, C.LastName
+ORDER BY LastOrderDate DESC;
