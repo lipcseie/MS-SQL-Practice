@@ -796,3 +796,10 @@ WHERE O.OrderDate >= DATEADD(MONTH, -6, GETDATE())
 GROUP BY C.CustomerID, C.FirstName, C.LastName
 ORDER BY TotalSpent DESC;
 
+--Retrieves the top 5 customers who have placed the most orders in the last year:
+SELECT TOP 5 C.CustomerID, C.FirstName, C.LastName, COUNT(O.OrderID) AS TotalOrders
+FROM Customers C
+JOIN  Orders O ON C.CustomerID = O.CustomerID
+WHERE O.OrderDate >= DATEADD(YEAR, -1, GETDATE())  -- Orders in the last year
+GROUP BY C.CustomerID, C.FirstName, C.LastName
+ORDER BY TotalOrders DESC;
