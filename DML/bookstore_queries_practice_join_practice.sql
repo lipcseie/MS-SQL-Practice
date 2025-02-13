@@ -819,3 +819,12 @@ FROM Books B
 JOIN  Orders O ON B.BookID = O.BookID
 GROUP BY B.BookID, B.Title
 ORDER BY TotalSold DESC;
+
+--  retrieve the total revenue generated per customer, sorted from highest to lowest
+SELECT TOP 10 C.CustomerID,C.FirstName, C.LastName, 
+SUM(O.Quantity * B.Price) AS TotalSpent
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY C.CustomerID, C.FirstName, C.LastName
+ORDER BY TotalSpent DESC;
