@@ -836,3 +836,11 @@ FROM Books B
 JOIN Orders O ON B.BookID = O.BookID
 GROUP BY B.BookID, B.Title
 ORDER BY TotalCopiesSold DESC;
+
+--  retrieves customers who have placed the most orders, showing the top 5:
+SELECT TOP 5  C.CustomerID, C.FirstName, C.LastName, 
+COUNT(O.OrderID) AS TotalOrders
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+GROUP BY C.CustomerID, C.FirstName, C.LastName
+ORDER BY TotalOrders DESC;
