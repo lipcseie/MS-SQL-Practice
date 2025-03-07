@@ -914,3 +914,12 @@ JOIN Orders O ON C.CustomerID = O.CustomerID
 JOIN  Books B ON O.BookID = B.BookID
 GROUP BY C.CustomerID, C.FirstName, C.LastName
 ORDER BY TotalSpent DESC;
+
+--  top 5 best-selling book genres based on the total quantity sold:
+SELECT TOP 5 B.Genre, 
+SUM(O.Quantity) AS TotalBooksSold
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+GROUP BY B.Genre
+ORDER BY TotalBooksSold DESC;
+
