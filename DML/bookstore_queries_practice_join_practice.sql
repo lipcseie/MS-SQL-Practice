@@ -923,3 +923,13 @@ JOIN Orders O ON B.BookID = O.BookID
 GROUP BY B.Genre
 ORDER BY TotalBooksSold DESC;
 
+-- Retrieve the top 5 customers who have spent the most on books in the last 6 months
+SELECT TOP 5 C.CustomerID,  C.FirstName, C.LastName, 
+SUM(O.Quantity * B.Price) AS TotalSpent
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+WHERE O.OrderDate >= DATEADD(MONTH, -6, GETDATE()) -- Last 6 months
+GROUP BY C.CustomerID, C.FirstName, C.LastName
+ORDER BY TotalSpent DESC;
+
