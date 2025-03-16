@@ -933,3 +933,11 @@ WHERE O.OrderDate >= DATEADD(MONTH, -6, GETDATE()) -- Last 6 months
 GROUP BY C.CustomerID, C.FirstName, C.LastName
 ORDER BY TotalSpent DESC;
 
+-- Find the Top 3 Best-Selling Book Genres in the Last Year
+SELECT TOP 3 B.Genre, 
+SUM(O.Quantity) AS TotalBooksSold
+FROM Books B
+JOIN Orders O ON B.BookID = O.BookID
+WHERE O.OrderDate >= DATEADD(YEAR, -1, GETDATE())  -- Orders from the last year
+GROUP BY B.Genre
+ORDER BY TotalBooksSold DESC;
