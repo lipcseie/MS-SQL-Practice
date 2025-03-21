@@ -941,3 +941,11 @@ JOIN Orders O ON B.BookID = O.BookID
 WHERE O.OrderDate >= DATEADD(YEAR, -1, GETDATE())  -- Orders from the last year
 GROUP BY B.Genre
 ORDER BY TotalBooksSold DESC;
+
+SELECT TOP 5 C.CustomerID, C.FirstName,C.LastName, 
+SUM(O.Quantity * B.Price) AS TotalSpent
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY C.CustomerID, C.FirstName, C.LastName
+ORDER BYTotalSpent DESC;
