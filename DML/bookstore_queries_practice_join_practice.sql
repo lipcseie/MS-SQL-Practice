@@ -948,4 +948,13 @@ FROM Customers C
 JOIN Orders O ON C.CustomerID = O.CustomerID
 JOIN Books B ON O.BookID = B.BookID
 GROUP BY C.CustomerID, C.FirstName, C.LastName
-ORDER BYTotalSpent DESC;
+ORDER BY TotalSpent DESC;
+
+-- Retrieve the Top 5 Customers Who Spent the Most Money
+SELECT TOP 5 C.CustomerID, C.FirstName, C.LastName, 
+SUM(O.Quantity * B.Price) AS TotalSpent
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Books B ON O.BookID = B.BookID
+GROUP BY C.CustomerID, C.FirstName, C.LastName
+ORDER BY TotalSpent DESC;
