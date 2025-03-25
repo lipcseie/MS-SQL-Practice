@@ -958,3 +958,12 @@ JOIN Orders O ON C.CustomerID = O.CustomerID
 JOIN Books B ON O.BookID = B.BookID
 GROUP BY C.CustomerID, C.FirstName, C.LastName
 ORDER BY TotalSpent DESC;
+
+-- Find the Most Popular Book Genres in the Last 6 Months
+SELECT TOP 5 B.Genre, 
+SUM(O.Quantity) AS TotalBooksSold
+FROM Books B
+JOIN  Orders O ON B.BookID = O.BookID
+WHERE O.OrderDate >= DATEADD(MONTH, -6, GETDATE())  -- Last 6 months
+GROUP BY B.Genre
+ORDER BY TotalBooksSold DESC;
